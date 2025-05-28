@@ -1,106 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EHSAAN 777-Casino App</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EHSAAN 777-Casino App</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* New referral tab style */
+    #referral-tab {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #ffffff;
+      border-top: 2px solid #ccc;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 -4px 10px rgba(0,0,0,0.2);
+      z-index: 999;
+    }
+    #referral-tab input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px auto;
+      font-size: 16px;
+    }
+    #referral-tab button {
+      padding: 8px 16px;
+      font-size: 16px;
+      cursor: pointer;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 6px;
+    }
+    #referral-message {
+      margin-top: 10px;
+      color: green;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Left Side Navigation Menu -->
-        <nav class="side-nav">
-            <div class="menu-header">
-                <h3>Join the Fun!</h3>
-                <p>Explore, Play, Win!</p>
-                <p>Your Adventure Awaits!</p>
-            </div>
-            <ul class="menu-items">
-                <li><a href="home.html">Home</a></li>
-                <li><a href="deposit.html">Deposit</a></li>
-                <li><a href="link.html">Link WhatsApp</a></li>
-                <li><a href="withdrawal.html">Withdrawal</a></li>
-            </ul>
-        </nav>
+  <div class="container">
+    <!-- Left Side Navigation Menu -->
+    <nav class="side-nav">
+      <div class="menu-header">
+        <h3>Join the Fun!</h3>
+        <p>Explore, Play, Win!</p>
+        <p>Your Adventure Awaits!</p>
+      </div>
+      <ul class="menu-items">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="deposit.html">Deposit</a></li>
+        <li><a href="link.html">Link WhatsApp</a></li>
+        <li><a href="withdrawal.html">Withdrawal</a></li>
+      </ul>
+    </nav>
 
-        <!-- Header -->
-        <header>
-            <div class="logo">EHSAAN777</div>
-            <div class="balance">
-                <span class="currency">PKR</span>
-                <span class="amount">0.00</span>
-                <button class="deposit-btn">Deposit</button>
-                <img src="bell-icon.png" alt="Notifications" class="notification-icon">
-            </div>
-        </header>
+    <!-- Header -->
+    <header>
+      <div class="logo">EHSAAN777</div>
+      <div class="balance">
+        <span class="currency">PKR</span>
+        <span class="amount">0.00</span>
+        <button class="deposit-btn">Deposit</button>
+        <img src="bell-icon.png" alt="Notifications" class="notification-icon">
+      </div>
+    </header>
 
-        <!-- Promotional Banners -->
-        <section class="promotions">
-            <!-- Banner 1 -->
-            <div class="banner banner1">
-                <div class="banner-text">
-                    <h2>SPIN & WIN Rs777</h2>
-                    <p>BY INVITING FRIENDS</p>
-                    <p class="subtext">Earn spin chances by inviting friends and win big now!</p>
-                </div>
-                <div class="banner-image">
-                    <img src="fortune-gems.png" alt="Fortune Gems">
-                    <div class="win-info">
-                        <p>72X</p>
-                        <p class="username">Ygdeydqe</p>
-                        <p class="amount">Rs 720.00</p>
-                    </div>
-                </div>
-            </div>
+    <!-- Promotional Banners -->
+    <section class="promotions">
+      <!-- Banner 1 -->
+      <div class="banner banner1">
+        <div class="banner-text">
+          <h2>SPIN & WIN Rs777</h2>
+          <p>BY INVITING FRIENDS</p>
+          <p class="subtext">Earn spin chances by inviting friends and win big now!</p>
+        </div>
+        <div class="banner-image">
+          <img src="fortune-gems.png" alt="Fortune Gems" />
+          <div class="win-info">
+            <p>72X</p>
+            <p class="username">Ygdeydqe</p>
+            <p class="amount">Rs 720.00</p>
+          </div>
+        </div>
+      </div>
 
-            <!-- Banner 2 -->
-            <div class="banner banner2">
-                <div class="banner-text">
-                    <h2>UP TO 25% CASHBACK</h2>
-                    <p>Real Money Back on Your Losses</p>
-                </div>
-                <div class="banner-image">
-                    <img src="vip-checkin.png" alt="VIP Check-In">
-                    <p class="surprise">SURPRISE GIFT</p>
-                </div>
-            </div>
+      <!-- Banner 2 -->
+      <div class="banner banner2">
+        <div class="banner-text">
+          <h2>UP TO 25% CASHBACK</h2>
+          <p>Real Money Back on Your Losses</p>
+        </div>
+        <div class="banner-image">
+          <img src="vip-checkin.png" alt="VIP Check-In" />
+          <p class="surprise">SURPRISE GIFT</p>
+        </div>
+      </div>
 
-            <!-- Banner 3 -->
-            <div class="banner banner3">
-                <div class="banner-text">
-                    <h2>GIFT CENTER</h2>
-                    <p>Bet to get cash rewards</p>
-                </div>
-                <div class="banner-image">
-                    <img src="gift-center.png" alt="Gift Center">
-                </div>
-            </div>
-        </section>
+      <!-- Banner 3 -->
+      <div class="banner banner3">
+        <div class="banner-text">
+          <h2>GIFT CENTER</h2>
+          <p>Bet to get cash rewards</p>
+        </div>
+        <div class="banner-image">
+          <img src="gift-center.png" alt="Gift Center" />
+        </div>
+      </div>
+    </section>
 
-        <!-- Navigation Bar -->
-        <nav class="bottom-nav">
-            <div class="nav-item active">
-                <img src="casino-icon.png" alt="Casino">
-                <p>Casino</p>
-            </div>
-            <div class="nav-item">
-                <img src="invite-icon.png" alt="Invite Spin">
-                <p>Invite Spin</p>
-            </div>
-            <div class="nav-item">
-                <img src="carnival-icon.png" alt="Carnival">
-                <p>Carnival</p>
-            </div>
-            <div class="nav-item">
-                <img src="promotions-icon.png" alt="Promotions">
-                <p>Promotions</p>
-            </div>
-            <div class="nav-item">
-                <img src="profile-icon.png" alt="Profile">
-                <p>Profile</p>
-            </div>
-        </nav>
+    <!-- Referral Tab -->
+    <div id="referral-tab">
+      <p><strong>If you share this link, you will earn 10PKR!</strong></p>
+      <input type="text" id="referral-link" value="https://arslanuv.github.io/wewhatsapp/index.html" readonly />
+      <br />
+      <button onclick="copyReferral()">Copy Link</button>
+      <p id="referral-message" style="display: none;">Link copied! You earned 10PKR 🎉</p>
     </div>
-    <script src="script.js"></script>
+
+    <!-- Navigation Bar -->
+    <nav class="bottom-nav">
+      <div class="nav-item active">
+        <img src="casino-icon.png" alt="Casino" />
+        <p>Casino</p>
+      </div>
+      <div class="nav-item" id="invite-spin">
+        <img src="invite-icon.png" alt="Invite Spin" />
+        <p>Invite Spin</p>
+      </div>
+      <div class="nav-item">
+        <img src="carnival-icon.png" alt="Carnival" />
+        <p>Carnival</p>
+      </div>
+      <div class="nav-item">
+        <img src="promotions-icon.png" alt="Promotions" />
+        <p>Promotions</p>
+      </div>
+      <div class="nav-item">
+        <img src="profile-icon.png" alt="Profile" />
+        <p>Profile</p>
+      </div>
+    </nav>
+  </div>
+
+  <script>
+    // Show referral tab
+    document.getElementById('invite-spin').addEventListener('click', function () {
+      const tab = document.getElementById('referral-tab');
+      tab.style.display = 'block';
+    });
+
+    // Copy link
+    function copyReferral() {
+      const input = document.getElementById("referral-link");
+      input.select();
+      input.setSelectionRange(0, 99999); // For mobile
+      document.execCommand("copy");
+      document.getElementById("referral-message").style.display = "block";
+    }
+  </script>
 </body>
-                    </html>
+                </html>
