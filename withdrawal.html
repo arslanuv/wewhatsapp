@@ -68,6 +68,57 @@
             margin-top: 5px;
             display: none;
         }
+
+        /* Popup Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: #333;
+            position: relative;
+            max-width: 300px;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        .popup-content .cross {
+            font-size: 40px;
+            color: red;
+            margin-bottom: 10px;
+        }
+
+        .close-btn {
+            margin-top: 20px;
+            background: #25D366;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            background: #128C7E;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            20%, 40%, 60%, 80% { transform: translateX(10px); }
+        }
     </style>
 </head>
 <body>
@@ -96,6 +147,15 @@
         <button onclick="withdraw()">Withdraw</button>
     </div>
 
+    <!-- Popup -->
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <div class="cross">❌</div>
+            <p>You need to deposit 100PKR first</p>
+            <button class="close-btn" onclick="closePopup()">OK</button>
+        </div>
+    </div>
+
     <script>
         function withdraw() {
             const method = document.getElementById('method').value;
@@ -103,8 +163,17 @@
             const phone = document.getElementById('phone').value;
             const amount = parseInt(document.getElementById('amount').value);
             const error = document.getElementById('error');
+            const popup = document.getElementById('popup');
 
             error.style.display = 'none';
+
+            // Check if user has deposited at least 100 PKR
+            const hasDeposited = localStorage.getItem('hasDeposited') === 'true';
+
+            if (!hasDeposited) {
+                popup.style.display = 'flex';
+                return;
+            }
 
             // Validation
             if (!name) {
@@ -137,6 +206,14 @@
             alert(`Withdrawal of ${amount} PKR via ${method} successful!`);
             window.location.href = 'home.html';
         }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        // For demo purposes, you can simulate a deposit status
+        // Set this to true to bypass the popup for testing
+        // localStorage.setItem('hasDeposited', 'true');
     </script>
 </body>
 </html>
