@@ -1,4 +1,56 @@
-* {
+/* styles.css */
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.side-nav {
+    width: 200px;
+    background-color: #f8f8f8;
+    padding: 20px;
+    height: 100vh;
+    border-right: 1px solid #ddd;
+}
+
+.menu-header {
+    margin-bottom: 20px;
+}
+
+.menu-header h3 {
+    font-size: 1.5em;
+    color: #333;
+    margin: 0;
+}
+
+.menu-header p {
+    font-size: 0.9em;
+    color: #666;
+    margin: 5px 0;
+}
+
+.menu-items {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-items li {
+    margin: 10px 0;
+}
+
+.menu-items a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 1.1em;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.menu-items a:hover {
+    background-color: #007bff;
+    color: #fff;
+}* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
