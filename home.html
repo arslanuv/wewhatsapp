@@ -3,270 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WhatsApp Earning - Home</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: white;
-            min-height: 100vh;
-            position: relative;
-        }
-
-        .container {
-            padding: 30px;
-            text-align: center;
-            margin-top: 60px;
-        }
-
-        h1 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-
-        p {
-            font-size: 18px;
-            margin-bottom: 30px;
-        }
-
-        .balance {
-            font-size: 24px;
-            margin-bottom: 20px;
-            background: orange;
-            padding: 10px;
-            border-radius: 15px;
-        }
-
-        .logout-btn {
-            background-color: #25D366;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        .logout-btn:hover {
-            background-color: #128C7E;
-        }
-
-        /* Sidebar Menu */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -250px;
-            width: 250px;
-            height: 100%;
-            background: #fff;
-            color: #333;
-            transition: left 0.3s;
-            z-index: 1000;
-        }
-
-        .sidebar.active {
-            left: 0;
-        }
-
-        .menu-icon {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            font-size: 24px;
-            cursor: pointer;
-            color: white;
-            z-index: 1001;
-        }
-
-        .sidebar ul {
-            list-style: none;
-            padding: 50px 20px;
-        }
-
-        .sidebar ul li {
-            margin: 20px 0;
-        }
-
-        .sidebar ul li a {
-            color: #333;
-            text-decoration: none;
-            font-size: 18px;
-        }
-
-        .sidebar ul li a:hover {
-            color: #128C7E;
-        }
-
-        /* Popup for Registration Bonus */
-        .popup {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s, visibility 0.3s;
-        }
-
-        .popup.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .popup-content {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            animation: popIn 0.5s ease forwards;
-        }
-
-        .popup-content h3 {
-            color: #128C7E;
-            margin-bottom: 20px;
-        }
-
-        .popup-content button {
-            background-color: #25D366;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .popup-content button:hover {
-            background-color: #128C7E;
-        }
-
-        @keyframes popIn {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        /* Coin Animation */
-        .coin-animation {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 50px;
-            color: gold;
-            z-index: 1002;
-            display: none;
-        }
-
-        .coin-animation.active {
-            display: block;
-            animation: coinFall 1s ease forwards;
-        }
-
-        @keyframes coinFall {
-            0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-            100% { transform: translate(-50%, 100vh) scale(0.5); opacity: 0; }
-        }
-    </style>
+    <title>FATAH777 - Casino App</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Menu Icon -->
-    <div class="menu-icon" onclick="toggleSidebar()">&#9776;</div>
-
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-        <ul>
-            <li><a href="home.html">Home</a></li>
-            <li><a href="deposit.html">Deposit</a></li>
-            <li><a href="link.html">Link WhatsApp</a></li>
-            <li><a href="withdrawal.html">Withdrawal</a></li>
-        </ul>
-    </div>
-
     <div class="container">
-        <h1>Welcome to WhatsApp Earning</h1>
-        <h2>Controlled By <strong>AOUN KHAN</strong><h2>
-        <p>Hello, <span id="username"></span>! You have successfully logged in.</p>
-        <div class="balance">Your Balance: <span id="balance">0</span> PKR</div>
-        <button class="logout-btn" onclick="logout()">Logout</button>
+        <!-- Header -->
+        <header>
+            <div class="logo">EHSAAN777</div>
+            <div class="balance">
+                <span class="currency">PKR</span>
+                <span class="amount">0.00</span>
+                <button class="deposit-btn">Deposit</button>
+                <img src="bell-icon.png" alt="Notifications" class="notification-icon">
+            </div>
+        </header>
+
+        <!-- Promotional Banners -->
+        <section class="promotions">
+            <!-- Banner 1 -->
+            <div class="banner banner1">
+                <div class="banner-text">
+                    <h2>SPIN & WIN Rs777</h2>
+                    <p>BY INVITING FRIENDS</p>
+                    <p class="subtext">Earn spin chances by inviting friends and win big now!</p>
+                </div>
+                <div class="banner-image">
+                    <img src="fortune-gems.png" alt="Fortune Gems">
+                    <div class="win-info">
+                        <p>72X</p>
+                        <p class="username">Ygdeydqe</p>
+                        <p class="amount">Rs 720.00</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Banner 2 -->
+            <div class="banner banner2">
+                <div class="banner-text">
+                    <h2>UP TO 25% CASHBACK</h2>
+                    <p>Real Money Back on Your Losses</p>
+                </div>
+                <div class="banner-image">
+                    <img src="vip-checkin.png" alt="VIP Check-In">
+                    <p class="surprise">SURPRISE GIFT</p>
+                </div>
+            </div>
+
+            <!-- Banner 3 -->
+            <div class="banner banner3">
+                <div class="banner-text">
+                    <h2>GIFT CENTER</h2>
+                    <p>Bet to get cash rewards</p>
+                </div>
+                <div class="banner-image">
+                    <img src="gift-center.png" alt="Gift Center">
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation Bar -->
+        <nav class="bottom-nav">
+            <div class="nav-item active">
+                <img src="casino-icon.png" alt="Casino">
+                <p>Casino</p>
+            </div>
+            <div class="nav-item">
+                <img src="invite-icon.png" alt="Invite Spin">
+                <p>Invite Spin</p>
+            </div>
+            <div class="nav-item">
+                <img src="carnival-icon.png" alt="Carnival">
+                <p>Carnival</p>
+            </div>
+            <div class="nav-item">
+                <img src="promotions-icon.png" alt="Promotions">
+                <p>Promotions</p>
+            </div>
+            <div class="nav-item">
+                <img src="profile-icon.png" alt="Profile">
+                <p>Profile</p>
+            </div>
+        </nav>
     </div>
-
-    <!-- Registration Bonus Popup -->
-    <div class="popup" id="bonusPopup">
-        <div class="popup-content">
-            <h3>Claim your Registration Bonus 100 PKR</h3>
-            <button onclick="claimBonus()">Claim</button>
-        </div>
-    </div>
-
-    <!-- Coin Animation -->
-    <div class="coin-animation" id="coinAnimation">💰</div>
-
-    <script>
-        // Check if user is logged in
-        const loggedInUser = localStorage.getItem('loggedInUser');
-        if (!loggedInUser) {
-            window.location.href = 'index.html';
-        } else {
-            document.getElementById('username').textContent = loggedInUser;
-        }
-
-        // Initialize balance
-        let balance = parseInt(localStorage.getItem('balance')) || 0;
-        document.getElementById('balance').textContent = balance;
-
-        // Show registration bonus popup if not claimed
-        const bonusClaimed = localStorage.getItem('bonusClaimed');
-        if (!bonusClaimed) {
-            document.getElementById('bonusPopup').classList.add('active');
-        }
-
-        // Claim bonus function with animation
-        function claimBonus() {
-            const coinAnimation = document.getElementById('coinAnimation');
-            coinAnimation.classList.add('active');
-
-            // Update balance with count-up animation
-            let startBalance = balance;
-            balance += 100;
-            localStorage.setItem('balance', balance);
-            localStorage.setItem('bonusClaimed', 'true');
-
-            let counter = 0;
-            const interval = setInterval(() => {
-                if (counter >= 100) {
-                    clearInterval(interval);
-                    document.getElementById('balance').textContent = balance;
-                } else {
-                    counter += 2;
-                    document.getElementById('balance').textContent = startBalance + counter;
-                }
-            }, 20);
-
-            document.getElementById('bonusPopup').classList.remove('active');
-        }
-
-        // Toggle sidebar
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('active');
-        }
-
-        // Logout function
-        function logout() {
-            localStorage.removeItem('loggedInUser');
-            window.location.href = 'index.html';
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
