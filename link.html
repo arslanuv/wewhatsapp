@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Earning - Link WhatsApp</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #25D366;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #128C7E;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .success-message {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .success-message.active {
+            display: flex;
+        }
+
+        .success-message div {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            color: #128C7E;
+            animation: popIn 0.5s ease forwards;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .timer {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Link WhatsApp</h2>
+        <div id="linkSection">
+            <div class="form-group">
+                <label>Phone Number:</label>
+                <input type="text" id="phoneNumber" placeholder="+923XXXXXXXXX">
+            </div>
+            <button onclick="getPairingCode()">Get Pairing Code</button>
+        </div>
+        <div id="claimSection" style="display: none;">
+            <p>Pairing Code: <span id="pairingCode"></span></p>
+            <p>Go to WhatsApp > Linked Devices > Link a Device > Link with phone number, and enter the code.</p>
+            <button onclick="linkWhatsApp()">Link</button>
+            <button id="claimBtn" onclick="claimDailyBonus()" style="display: none;">Claim 100 PKR</button>
+            <div class="timer" id="timer"></div>
+        </div>
+    </div>
+
+    <div class="success-message" id="successMessage">
+        <div>Successfully Linked!</div>
+    </div>
+
+    <script>
+        const linkSection = document.getElementById('linkSection');
+        const claimSection = document.getElementById('claimSection');
+        const pairingCode = document.getElementById('pairingCode');
+        const claimBtn = document.getElementById('claimBtn');
+        const timer = document.getElementById('timer');
+        const successMessage = document.getElementById('successMessage');
+
+        // Check if already linked
+        const isLinked = localStorage.getItem('whatsappLinked');
+        if (isLinked) {
+            linkSection.style.display = 'none';
+            claimSection.style.display = 'block';
+            pairingCode.textContent = 'Already Linked';
+            checkClaimStatus();
+        }
+
+        function getPairingCode() {
+            const phone = document.getElementById('phoneNumber').value;
+            if (!phone.startsWith('+923') || phone.length !== 13) {
+                alert('Please enter a valid phone number (+923XXXXXXXXX)');
+                return;
+            }
+
+            const code = Math.floor(100000 + Math.random() * 900000); // Random 6-digit code
+            pairingCode.textContent = code;
+            linkSection.style.display = 'none';
+            claimSection.style.display = 'block';
+        }
+
+        function linkWhatsApp() {
+            localStorage.setItem('whatsappLinked', 'true');
+            successMessage.classList.add('active');
+            setTimeout(() => {
+                successMessage.classList.remove('active');
+                checkClaimStatus();
+            }, 2000);
+        }
+
+        function checkClaimStatus() {
+            const lastClaim = localStorage.getItem('lastClaim');
+            const now = Date.now();
+            if (!lastClaim || (now - lastClaim) >= 24 * 60 * 60 * 1000) {
+                claimBtn.style.display = 'block';
+                timer.textContent = '';
+            } else {
+                claimBtn.style.display = 'none';
+                startTimer(lastClaim);
+            }
+        }
+
+        function startTimer(lastClaim) {
+            const now = Date.now();
+            const timeLeft = 24 * 60 * 60 * 1000 - (now - lastClaim);
+            const interval = setInterval(() => {
+                const remaining = Math.max(0, timeLeft - (Date.now() - now));
+                const hours = Math.floor(remaining / (60 * 60 * 1000));
+                const minutes = Math.floor((remaining % (60 * 60 * 1000)) / (60 * 1000));
+                const seconds = Math.floor((remaining % (60 * 1000)) / 1000);
+                timer.textContent = `Next Claim in ${hours}h ${minutes}m ${seconds}s`;
+                if (remaining <= 0) {
+                    clearInterval(interval);
+                    claimBtn.style.display = 'block';
+                    timer.textContent = '';
+                }
+            }, 1000);
+        }
+
+        function claimDailyBonus() {
+            let balance = parseInt(localStorage.getItem('balance')) || 0;
+            balance += 100;
+            localStorage.setItem('balance', balance);
+            localStorage.setItem('lastClaim', Date.now());
+            alert('100 PKR Claimed!');
+            checkClaimStatus();
+        }
+    </script>
+</body>
+</html>

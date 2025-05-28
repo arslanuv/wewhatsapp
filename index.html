@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Earning - Login & Register</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .toggle {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .toggle button {
+            background: none;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .toggle button.active {
+            color: #128C7E;
+            border-bottom: 2px solid #128C7E;
+        }
+
+        .form {
+            display: none;
+        }
+
+        .form.active {
+            display: block;
+        }
+
+        .form input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form .error {
+            color: red;
+            font-size: 14px;
+            margin-top: -5px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        .form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #25D366;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form button:hover {
+            background-color: #128C7E;
+        }
+
+        .form p {
+            margin-top: 10px;
+            color: #666;
+        }
+
+        /* Animated Success Overlay */
+        .success-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 2;
+        }
+
+        .success-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .success-message {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            animation: popIn 0.5s ease forwards;
+        }
+
+        .success-message h3 {
+            font-size: 24px;
+            color: #128C7E;
+            margin-bottom: 10px;
+        }
+
+        .success-message p {
+            color: #666;
+        }
+
+        /* Animation for pop-in effect */
+        @keyframes popIn {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Particle Animation for Background */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            animation: float 3s infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    <div class="container">
+        <h2>WhatsApp Earning</h2>
+        <div class="toggle">
+            <button id="loginBtn" class="active">Login</button>
+            <button id="registerBtn">Register</button>
+        </div>
+
+        <!-- Login Form -->
+        <div id="loginForm" class="form active">
+            <input type="text" id="loginUsername" placeholder="Username or Phone Number" required>
+            <input type="password" id="loginPassword" placeholder="Password" required>
+            <div id="loginError" class="error"></div>
+            <button onclick="handleLogin()">Login</button>
+            <p>Don't have an account? Register now!</p>
+        </div>
+
+        <!-- Register Form -->
+        <div id="registerForm" class="form">
+            <input type="text" id="registerUsername" placeholder="Username or Phone Number" required>
+            <div id="usernameError" class="error">This username is already taken</div>
+            <input type="password" id="registerPassword" placeholder="Password (min 8 chars, 1 uppercase, 1 number)" required>
+            <div id="passwordError" class="error">Password must be at least 8 characters, with 1 uppercase letter and 1 number</div>
+            <button onclick="handleRegister()">Register</button>
+            <p>Already have an account? Login now!</p>
+        </div>
+    </div>
+
+    <!-- Success Overlay -->
+    <div class="success-overlay" id="successOverlay">
+        <div class="success-message">
+            <h3 id="successTitle"></h3>
+            <p id="successText"></p>
+        </div>
+    </div>
+
+    <script>
+        // Particle Animation
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.width = `${Math.random() * 10 + 5}px`;
+                particle.style.height = particle.style.width;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 3}s`;
+                particlesContainer.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // Toggle between login and register forms
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const successOverlay = document.getElementById('successOverlay');
+        const successTitle = document.getElementById('successTitle');
+        const successText = document.getElementById('successText');
+
+        loginBtn.addEventListener('click', () => {
+            loginBtn.classList.add('active');
+            registerBtn.classList.remove('active');
+            loginForm.classList.add('active');
+            registerForm.classList.remove('active');
+        });
+
+        registerBtn.addEventListener('click', () => {
+            registerBtn.classList.add('active');
+            loginBtn.classList.remove('active');
+            registerForm.classList.add('active');
+            loginForm.classList.remove('active');
+        });
+
+        // Simulated user database (stored in localStorage)
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+
+        // Register function
+        function handleRegister() {
+            const username = document.getElementById('registerUsername').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            const usernameError = document.getElementById('usernameError');
+            const passwordError = document.getElementById('passwordError');
+
+            // Reset error messages
+            usernameError.style.display = 'none';
+            passwordError.style.display = 'none';
+
+            // Check if username already exists
+            if (users.some(user => user.username === username)) {
+                usernameError.style.display = 'block';
+                return;
+            }
+
+            // Password validation (min 8 chars, 1 uppercase, 1 number)
+            const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+            if (!passwordRegex.test(password)) {
+                passwordError.style.display = 'block';
+                return;
+            }
+
+            // Save user to localStorage
+            users.push({ username, password });
+            localStorage.setItem('users', JSON.stringify(users));
+
+            // Show animated success message
+            successTitle.textContent = 'Registration Successful!';
+            successText.textContent = 'You have successfully registered. Please login to continue.';
+            successOverlay.classList.add('active');
+
+            // Switch to login form after 2 seconds
+            setTimeout(() => {
+                successOverlay.classList.remove('active');
+                loginBtn.click();
+            }, 2000);
+        }
+
+        // Login function
+        function handleLogin() {
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const loginError = document.getElementById('loginError');
+
+            // Reset error message
+            loginError.style.display = 'none';
+
+            // Check credentials
+            const user = users.find(user => user.username === username && user.password === password);
+            if (!user) {
+                loginError.textContent = 'Invalid username or password';
+                loginError.style.display = 'block';
+                return;
+            }
+
+            // Save logged-in user
+            localStorage.setItem('loggedInUser', username);
+
+            // Show animated success message
+            successTitle.textContent = 'Login Successful!';
+            successText.textContent = 'Welcome back! Redirecting to your dashboard...';
+            successOverlay.classList.add('active');
+
+            // Redirect to home.html after 2 seconds
+            setTimeout(() => {
+                window.location.href = 'home.html';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
