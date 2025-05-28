@@ -6,11 +6,146 @@
   <title>EHSAAN 777-Casino App</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
-    /* New referral tab style */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f7fa;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(90deg, #5f27cd, #10ac84);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      z-index: 1001;
+    }
+
+    .hamburger {
+      font-size: 24px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .balance {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .balance .currency, .balance .amount {
+      font-size: 14px;
+    }
+
+    .balance .deposit-btn {
+      padding: 6px 12px;
+      font-size: 13px;
+      background: #ff4757;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+
+    .balance .deposit-btn:hover {
+      background: #ff6b81;
+    }
+
+    .notification-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .container {
+      padding-top: 70px;
+    }
+
+    .side-nav {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 250px;
+      height: 100%;
+      background: #fff;
+      z-index: 1000;
+      transition: left 0.3s ease;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+      padding-top: 60px;
+    }
+
+    .side-nav.open {
+      left: 0;
+    }
+
+    .menu-header {
+      text-align: center;
+      padding: 20px;
+      background: #10ac84;
+      color: white;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .menu-items {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .menu-items li a {
+      display: block;
+      padding: 12px 16px;
+      color: #444;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .menu-items li a:hover {
+      background: #f1f1f1;
+    }
+
+    .banner {
+      margin: 16px;
+      padding: 18px;
+      background: linear-gradient(135deg, #ff9ff3, #feca57);
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .banner img {
+      max-width: 100%;
+      border-radius: 6px;
+    }
+
+    .banner-text h2 {
+      margin: 0 0 8px;
+      color: #2d3436;
+    }
+
+    .banner-text p {
+      margin: 2px 0;
+    }
+
+    .subtext {
+      font-style: italic;
+      font-size: 13px;
+      color: #636e72;
+    }
+
     #referral-tab {
       display: none;
       position: fixed;
-      bottom: 0;
+      bottom: 60px;
       left: 0;
       width: 100%;
       background: #ffffff;
@@ -20,31 +155,88 @@
       box-shadow: 0 -4px 10px rgba(0,0,0,0.2);
       z-index: 999;
     }
+
     #referral-tab input {
       width: 90%;
       padding: 10px;
       margin: 10px auto;
       font-size: 16px;
-    }
-    #referral-tab button {
-      padding: 8px 16px;
-      font-size: 16px;
-      cursor: pointer;
-      background: #28a745;
-      color: white;
-      border: none;
+      border: 2px solid #10ac84;
       border-radius: 6px;
     }
+
+    #referral-tab button {
+      padding: 10px 20px;
+      font-size: 15px;
+      cursor: pointer;
+      background: #10ac84;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    #referral-tab button:hover {
+      background: #1dd1a1;
+    }
+
     #referral-message {
       margin-top: 10px;
-      color: green;
+      color: #27ae60;
       font-weight: bold;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      background: linear-gradient(to right, #576574, #222f3e);
+      color: white;
+      z-index: 1001;
+    }
+
+    .nav-item {
+      padding: 8px 0;
+      text-align: center;
+      font-size: 12px;
+      flex: 1;
+    }
+
+    .nav-item img {
+      width: 26px;
+      height: 26px;
+      display: block;
+      margin: 0 auto 4px;
+    }
+
+    .nav-item p {
+      margin: 0;
+      font-size: 12px;
+    }
+
+    .nav-item.active {
+      background: rgba(255, 255, 255, 0.1);
     }
   </style>
 </head>
 <body>
+  <header>
+    <div style="display: flex; align-items: center;">
+      <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+      <div class="logo">EHSAAN777</div>
+    </div>
+    <div class="balance">
+      <span class="currency">PKR</span>
+      <span class="amount">0.00</span>
+      <button class="deposit-btn">Deposit</button>
+      <img src="bell-icon.png" alt="Notifications" class="notification-icon">
+    </div>
+  </header>
+
   <div class="container">
-    <!-- Left Side Navigation Menu -->
     <nav class="side-nav">
       <div class="menu-header">
         <h3>Join the Fun!</h3>
@@ -59,20 +251,7 @@
       </ul>
     </nav>
 
-    <!-- Header -->
-    <header>
-      <div class="logo">EHSAAN777</div>
-      <div class="balance">
-        <span class="currency">PKR</span>
-        <span class="amount">0.00</span>
-        <button class="deposit-btn">Deposit</button>
-        <img src="bell-icon.png" alt="Notifications" class="notification-icon">
-      </div>
-    </header>
-
-    <!-- Promotional Banners -->
     <section class="promotions">
-      <!-- Banner 1 -->
       <div class="banner banner1">
         <div class="banner-text">
           <h2>SPIN & WIN Rs777</h2>
@@ -89,7 +268,6 @@
         </div>
       </div>
 
-      <!-- Banner 2 -->
       <div class="banner banner2">
         <div class="banner-text">
           <h2>UP TO 25% CASHBACK</h2>
@@ -101,7 +279,6 @@
         </div>
       </div>
 
-      <!-- Banner 3 -->
       <div class="banner banner3">
         <div class="banner-text">
           <h2>GIFT CENTER</h2>
@@ -113,7 +290,6 @@
       </div>
     </section>
 
-    <!-- Referral Tab -->
     <div id="referral-tab">
       <p><strong>If you share this link, you will earn 10PKR!</strong></p>
       <input type="text" id="referral-link" value="https://arslanuv.github.io/wewhatsapp/index.html" readonly />
@@ -121,47 +297,47 @@
       <button onclick="copyReferral()">Copy Link</button>
       <p id="referral-message" style="display: none;">Link copied! You earned 10PKR 🎉</p>
     </div>
-
-    <!-- Navigation Bar -->
-    <nav class="bottom-nav">
-      <div class="nav-item active">
-        <img src="casino-icon.png" alt="Casino" />
-        <p>Casino</p>
-      </div>
-      <div class="nav-item" id="invite-spin">
-        <img src="invite-icon.png" alt="Invite Spin" />
-        <p>Invite Spin</p>
-      </div>
-      <div class="nav-item">
-        <img src="carnival-icon.png" alt="Carnival" />
-        <p>Carnival</p>
-      </div>
-      <div class="nav-item">
-        <img src="promotions-icon.png" alt="Promotions" />
-        <p>Promotions</p>
-      </div>
-      <div class="nav-item">
-        <img src="profile-icon.png" alt="Profile" />
-        <p>Profile</p>
-      </div>
-    </nav>
   </div>
 
+  <nav class="bottom-nav">
+    <div class="nav-item active">
+      <img src="casino-icon.png" alt="Casino" />
+      <p>Casino</p>
+    </div>
+    <div class="nav-item" id="invite-spin">
+      <img src="invite-icon.png" alt="Invite Spin" />
+      <p>Invite Spin</p>
+    </div>
+    <div class="nav-item">
+      <img src="carnival-icon.png" alt="Carnival" />
+      <p>Carnival</p>
+    </div>
+    <div class="nav-item">
+      <img src="promotions-icon.png" alt="Promotions" />
+      <p>Promotions</p>
+    </div>
+    <div class="nav-item">
+      <img src="profile-icon.png" alt="Profile" />
+      <p>Profile</p>
+    </div>
+  </nav>
+
   <script>
-    // Show referral tab
+    function toggleMenu() {
+      document.querySelector('.side-nav').classList.toggle('open');
+    }
+
     document.getElementById('invite-spin').addEventListener('click', function () {
-      const tab = document.getElementById('referral-tab');
-      tab.style.display = 'block';
+      document.getElementById('referral-tab').style.display = 'block';
     });
 
-    // Copy link
     function copyReferral() {
       const input = document.getElementById("referral-link");
       input.select();
-      input.setSelectionRange(0, 99999); // For mobile
+      input.setSelectionRange(0, 99999);
       document.execCommand("copy");
       document.getElementById("referral-message").style.display = "block";
     }
   </script>
 </body>
-                </html>
+        </html>
