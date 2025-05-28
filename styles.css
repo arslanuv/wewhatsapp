@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #1a1a1a;
+    color: #fff;
+}
+
+.container {
+    max-width: 100%;
+    padding: 10px;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #000;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #00f;
+}
+
+.balance {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.currency {
+    font-size: 14px;
+    color: #ccc;
+}
+
+.amount {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.deposit-btn {
+    background-color: #f39c12;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.notification-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Promotional Banners */
+.promotions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.banner {
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.banner1 {
+    background: linear-gradient(to right, #000, #ff4500);
+}
+
+.banner2 {
+    background: linear-gradient(to right, #4b0082, #8a2be2);
+}
+
+.banner3 {
+    background: linear-gradient(to right, #4b0082, #8a2be2);
+}
+
+.banner-text h2 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.banner-text p {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.subtext {
+    font-size: 12px;
+    color: #ccc;
+}
+
+.banner-image img {
+    width: 100px;
+    height: auto;
+}
+
+.win-info p {
+    font-size: 14px;
+    text-align: center;
+}
+
+.username {
+    color: #ff0;
+}
+
+.amount {
+    color: #0f0;
+}
+
+.surprise {
+    background-color: #ff0;
+    color: #000;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #000;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ccc;
+    font-size: 12px;
+}
+
+.nav-item img {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 5px;
+}
+
+.nav-item.active {
+    color: #f39c12;
+}
