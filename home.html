@@ -225,12 +225,12 @@
 <body>
   <header>
     <div style="display: flex; align-items: center;">
-      <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+      <div class="hamburger" onclick="toggleMenu()">☰</div>
       <div class="logo">EHSAAN777</div>
     </div>
     <div class="balance">
       <span class="currency">PKR</span>
-      <span class="amount">0.00</span>
+      <span class="amount" id="balance-amount">0.00</span>
       <button class="deposit-btn">Deposit</button>
       <img src="bell-icon.png" alt="Notifications" class="notification-icon">
     </div>
@@ -291,11 +291,11 @@
     </section>
 
     <div id="referral-tab">
-      <p><strong>If you share this link, you will earn 10PKR!</strong></p>
+      <p><strong>If you share this link, you will earn 30PKR!</strong></p>
       <input type="text" id="referral-link" value="https://arslanuv.github.io/wewhatsapp/index.html" readonly />
       <br />
       <button onclick="copyReferral()">Copy Link</button>
-      <p id="referral-message" style="display: none;">Link copied! You earned 10PKR 🎉</p>
+      <p id="referral-message" style="display: none;">Link copied! You earned 30PKR 🎉</p>
     </div>
   </div>
 
@@ -323,21 +323,39 @@
   </nav>
 
   <script>
+    // Initialize balance
+    let balance = 100.00;
+
+    // Function to update the displayed balance
+    function updateBalance() {
+      document.getElementById('balance-amount').textContent = balance.toFixed(2);
+    }
+
+    // Function to toggle the side menu
     function toggleMenu() {
       document.querySelector('.side-nav').classList.toggle('open');
     }
 
+    // Event listener for Invite Spin tab
     document.getElementById('invite-spin').addEventListener('click', function () {
       document.getElementById('referral-tab').style.display = 'block';
     });
 
+    // Function to copy referral link and add 30 PKR to balance
     function copyReferral() {
       const input = document.getElementById("referral-link");
       input.select();
       input.setSelectionRange(0, 99999);
       document.execCommand("copy");
       document.getElementById("referral-message").style.display = "block";
+      
+      // Add 30 PKR to balance
+      balance += 30.00;
+      updateBalance();
     }
+
+    // Initialize balance on page load
+    updateBalance();
   </script>
 </body>
         </html>
