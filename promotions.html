@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EHSAAN 777 - Posts</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f7fa;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(90deg, #5f27cd, #10ac84);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      z-index: 1001;
+    }
+
+    .hamburger {
+      font-size: 24px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .balance {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .balance .currency, .balance .amount {
+      font-size: 14px;
+    }
+
+    .balance .deposit-btn {
+      padding: 6px 12px;
+      font-size: 13px;
+      background: #ff4757;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+
+    .balance .deposit-btn:hover {
+      background: #ff6b81;
+    }
+
+    .notification-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .container {
+      padding: 70px 16px 80px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .side-nav {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 250px;
+      height: 100%;
+      background: #fff;
+      z-index: 1000;
+      transition: left 0.3s ease;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+      padding-top: 60px;
+    }
+
+    .side-nav.open {
+      left: 0;
+    }
+
+    .menu-header {
+      text-align: center;
+      padding: 20px;
+      background: #10ac84;
+      color: white;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .menu-items {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .menu-items li a {
+      display: block;
+      padding: 12px 16px;
+      color: #444;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .menu-items li a:hover {
+      background: #f1f1f1;
+    }
+
+    .posts-section {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .post {
+      background: linear-gradient(135deg, #ff9ff3, #feca57);
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .post img {
+      max-width: 100%;
+      border-radius: 6px;
+    }
+
+    .post-text h2 {
+      margin: 0 0 8px;
+      color: #2d3436;
+      font-size: 20px;
+    }
+
+    .post-text p {
+      margin: 2px 0;
+      color: #444;
+    }
+
+    .subtext {
+      font-style: italic;
+      font-size: 13px;
+      color: #636e72;
+    }
+
+    .action-btn {
+      padding: 10px;
+      font-size: 15px;
+      cursor: pointer;
+      background: #10ac84;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      transition: background 0.3s;
+      text-align: center;
+    }
+
+    .action-btn:hover {
+      background: #1dd1a1;
+    }
+
+    .post-message {
+      margin-top: 10px;
+      text-align: center;
+      color: #27ae60;
+      font-weight: bold;
+      display: none;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      background: linear-gradient(to right, #576574, #222f3e);
+      color: white;
+      z-index: 1001;
+    }
+
+    .nav-item {
+      padding: 8px 0;
+      text-align: center;
+      font-size: 12px;
+      flex: 1;
+    }
+
+    .nav-item img {
+      width: 26px;
+      height: 26px;
+      display: block;
+      margin: 0 auto 4px;
+    }
+
+    .nav-item p {
+      margin: 0;
+      font-size: 12px;
+    }
+
+    .nav-item.active {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div style="display: flex; align-items: center;">
+      <div class="hamburger" onclick="toggleMenu()">☰</div>
+      <div class="logo">EHSAAN777</div>
+    </div>
+    <div class="balance">
+      <span class="currency">PKR</span>
+      <span class="amount" id="balance-amount">0.00</span>
+      <button class="deposit-btn">Deposit</button>
+      <img src="bell-icon.png" alt="Notifications" class="notification-icon">
+    </div>
+  </header>
+
+  <div class="container">
+    <nav class="side-nav">
+      <div class="menu-header">
+        <h3>Join the Fun!</h3>
+        <p>Explore, Play, Win!</p>
+        <p>Your Adventure Awaits!</p>
+      </div>
+      <ul class="menu-items">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="deposit.html">Deposit</a></li>
+        <li><a href="link.html">Link WhatsApp</a></li>
+        <li><a href="withdrawal.html">Withdrawal</a></li>
+        <li><a href="profile.html">Profile</a></li>
+      </ul>
+    </nav>
+
+    <section class="posts-section">
+      <h2 style="color: #2d3436; text-align: center; margin-bottom: 20px;">Latest Posts</h2>
+      <div id="posts-container"></div>
+    </section>
+  </div>
+
+  <nav class="bottom-nav">
+    <div class="nav-item">
+      <a href="index.html" style="text-decoration: none; color: white;">
+        <img src="casino-icon.png" alt="Casino" />
+        <p>Casino</p>
+      </a>
+    </div>
+    <div class="nav-item">
+      <a href="index.html#invite-spin" style="text-decoration: none; color: white;">
+        <img src="invite-icon.png" alt="Invite Spin" />
+        <p>Invite Spin</p>
+      </a>
+    </div>
+    <div class="nav-item">
+      <img src="carnival-icon.png" alt="Carnival" />
+      <p>Carnival</p>
+    </div>
+    <div class="nav-item active">
+      <img src="promotions-icon.png" alt="Posts" />
+      <p>Posts</p>
+    </div>
+    <div class="nav-item">
+      <a href="profile.html" style="text-decoration: none; color: white;">
+        <img src="profile-icon.png" alt="Profile" />
+        <p>Profile</p>
+      </a>
+    </div>
+  </nav>
+
+  <script>
+    // Initialize balance from localStorage
+    let balance = parseFloat(localStorage.getItem('balance')) || 0.00;
+
+    // Function to update the displayed balance
+    function updateBalance() {
+      document.getElementById('balance-amount').textContent = balance.toFixed(2);
+    }
+
+    // Function to toggle the side menu
+    function toggleMenu() {
+      document.querySelector('.side-nav').classList.toggle('open');
+    }
+
+    // Simulated posts data (replace with API call in a real app)
+    const posts = [
+      {
+        id: 'post-1',
+        title: 'Big Win Alert!',
+        description: 'User Ygdeydqe won Rs 720.00!',
+        subtext: 'Play now to join the winners!',
+        image: 'fortune-gems.png',
+        action: 'View Details'
+      },
+      {
+        id: 'post-2',
+        title: 'New Bonus Offer',
+        description: 'Get up to 25% cashback on losses!',
+        subtext: 'Claim your cashback today!',
+        image: 'vip-checkin.png',
+        action: 'Claim Now'
+      },
+      {
+        id: 'post-3',
+        title: 'Gift Center Unlocked',
+        description: 'Bet more to earn exciting rewards!',
+        subtext: 'Check out the Gift Center now!',
+        image: 'gift-center.png',
+        action: 'Claim Now'
+      }
+    ];
+
+    // Function to render posts
+    function renderPosts() {
+      const container = document.getElementById('posts-container');
+      container.innerHTML = '';
+      posts.forEach(post => {
+        const postElement = document.createElement('div');
+        postElement.className = 'post';
+        postElement.innerHTML = `
+          <div class="post-text">
+            <h2>${post.title}</h2>
+            <p>${post.description}</p>
+            <p class="subtext">${post.subtext}</p>
+          </div>
+          <div class="post-image">
+            <img src="${post.image}" alt="${post.title}" />
+          </div>
+          <button class="action-btn" onclick="handleAction('${post.id}', '${post.title}')">${post.action}</button>
+          <p class="post-message" id="message-${post.id}">Action completed!</p>
+        `;
+        container.appendChild(postElement);
+      });
+    }
+
+    // Function to handle post action
+    function handleAction(postId, postTitle) {
+      const message = document.getElementById(`message-${postId}`);
+      message.style.display = 'block';
+      setTimeout(() => {
+        message.style.display = 'none';
+      }, 3000);
+    }
+
+    // Initialize balance and posts on page load
+    updateBalance();
+    renderPosts();
+  </script>
+</body>
+</html>
